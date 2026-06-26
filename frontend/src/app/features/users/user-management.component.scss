@@ -1,0 +1,65 @@
+.create-card,
+.users-panel {
+  border-radius: 8px;
+}
+
+.create-form {
+  align-items: flex-start;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+}
+
+.create-form button {
+  height: 56px;
+}
+
+.users-panel {
+  overflow: hidden;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  color: var(--ff-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.user-cell {
+  display: grid;
+  gap: 3px;
+}
+
+.user-cell span {
+  color: var(--ff-muted);
+  font-size: 13px;
+}
+
+.role-select {
+  margin-top: 12px;
+  min-width: 240px;
+}
+
+@media (max-width: 1180px) {
+  .create-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .create-form {
+    grid-template-columns: 1fr;
+  }
+
+  .create-form button {
+    width: 100%;
+  }
+}

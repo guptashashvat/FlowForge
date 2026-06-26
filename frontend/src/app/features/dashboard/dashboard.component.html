@@ -1,0 +1,65 @@
+<section class="page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-subtitle">Operational view of onboarding approvals, pending ownership, and workflow throughput.</p>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <mat-spinner diameter="42" />
+    </div>
+  } @else if (error()) {
+    <div class="error-banner">{{ error() }}</div>
+  } @else if (dashboard(); as data) {
+    <div class="metric-grid">
+      @for (card of cards(data); track card.label) {
+        <mat-card class="metric-card" [class]="'metric-' + card.tone">
+          <mat-card-content>
+            <div class="metric-icon">
+              <mat-icon>{{ card.icon }}</mat-icon>
+            </div>
+            <div>
+              <div class="metric-label">{{ card.label }}</div>
+              <div class="metric-value">{{ card.value }}</div>
+              <div class="metric-hint">{{ card.hint }}</div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+
+    <div class="chart-grid">
+      <section class="surface chart-panel">
+        <h2 class="section-title">Requests By Status</h2>
+        <div class="status-chart">
+          @for (metric of data.requestsByStatus; track metric.status) {
+            <div class="status-row">
+              <span class="status-chip" [class]="statusClass(metric.status)">{{ metric.label }}</span>
+              <div class="bar-track">
+                <span class="bar-fill" [style.width.%]="percent(metric.total, data.totalRequests)"></span>
+              </div>
+              <strong>{{ metric.total }}</strong>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="surface chart-panel">
+        <h2 class="section-title">Requests By Month</h2>
+        <div class="month-chart">
+          @for (metric of data.requestsByMonth; track metric.month) {
+            <div class="month-column">
+              <div class="month-bar">
+                <span [style.height.%]="percent(metric.total, maxMonthTotal(data))"></span>
+              </div>
+              <strong>{{ metric.total }}</strong>
+              <small>{{ formatMonth(metric.month) }}</small>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</section>

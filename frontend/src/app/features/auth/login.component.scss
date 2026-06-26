@@ -1,0 +1,125 @@
+.login-page {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(23, 107, 135, 0.94), rgba(15, 76, 92, 0.96)),
+    radial-gradient(circle at 20% 20%, rgba(43, 179, 163, 0.28), transparent 28%);
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  min-height: 100vh;
+  padding: 56px;
+}
+
+.login-hero {
+  color: #ffffff;
+  max-width: 760px;
+}
+
+.brand-lockup {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+}
+
+.brand-mark {
+  align-items: center;
+  background: #2bb3a3;
+  border-radius: 8px;
+  display: flex;
+  font-size: 32px;
+  font-weight: 900;
+  height: 64px;
+  justify-content: center;
+  width: 64px;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
+}
+
+p {
+  color: #d9e2ec;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 52px;
+}
+
+.hero-metric {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.hero-metric strong {
+  display: block;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.hero-metric span {
+  color: #d9e2ec;
+  display: block;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.login-card {
+  border-radius: 8px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.26);
+}
+
+.login-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.login-form button {
+  height: 46px;
+}
+
+.login-form mat-spinner {
+  display: inline-block;
+}
+
+.demo-users {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.password-note {
+  background: var(--ff-surface-muted);
+  border-radius: 8px;
+  color: var(--ff-muted);
+  font-size: 13px;
+  margin-top: 16px;
+  padding: 12px;
+}
+
+@media (max-width: 920px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+
+  .login-card {
+    width: 100%;
+  }
+}

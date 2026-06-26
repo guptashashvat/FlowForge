@@ -1,0 +1,52 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav class="sidebar" mode="side" opened>
+    <div class="brand">
+      <div class="brand-mark">F</div>
+      <div>
+        <div class="brand-name">FlowForge</div>
+        <div class="brand-subtitle">Workflow Platform</div>
+      </div>
+    </div>
+
+    <mat-divider />
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/workflows" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>schema</mat-icon>
+        <span matListItemTitle>Workflows</span>
+      </a>
+      @if (auth.hasRole('HR_ADMIN')) {
+        <a mat-list-item routerLink="/users" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>manage_accounts</mat-icon>
+          <span matListItemTitle>User Management</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <mat-toolbar class="topbar">
+      <div>
+        <div class="topbar-title">Enterprise workflow operations</div>
+        <div class="topbar-subtitle">Reusable approvals, auditability, and role-based execution</div>
+      </div>
+      <span class="topbar-spacer"></span>
+      <div class="user-pill">
+        <span class="avatar">{{ initials() }}</span>
+        <span class="user-copy">
+          <strong>{{ auth.user()?.fullName }}</strong>
+          <small>{{ auth.user()?.email }}</small>
+        </span>
+      </div>
+      <button mat-stroked-button type="button" (click)="logout()">Logout</button>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

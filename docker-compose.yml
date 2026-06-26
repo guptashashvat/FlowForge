@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: flowforge-postgres
+    environment:
+      POSTGRES_DB: flowforge
+      POSTGRES_USER: flowforge
+      POSTGRES_PASSWORD: flowforge
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowforge -d flowforge"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: flowforge-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: flowforge
+      DB_USER: flowforge
+      DB_PASSWORD: flowforge
+      JWT_SECRET: flowforge-docker-demo-secret-change-before-production-64-character-value
+      CORS_ALLOWED_ORIGINS: http://localhost:4200,http://localhost:8081
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: flowforge-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres-data:

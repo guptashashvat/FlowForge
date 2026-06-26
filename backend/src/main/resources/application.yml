@@ -1,0 +1,34 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: flowforge-backend
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:flowforge}
+    username: ${DB_USER:flowforge}
+    password: ${DB_PASSWORD:flowforge}
+  flyway:
+    enabled: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:flowforge-local-development-secret-key-change-me-64-character-minimum-value}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:480}
+
+flowforge:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200,http://localhost:8081}
+
+logging:
+  level:
+    org.springframework.security: INFO

@@ -1,0 +1,138 @@
+<section class="page">
+  <a routerLink="/workflows" class="back-link">
+    <mat-icon>arrow_back</mat-icon>
+    Back to workflows
+  </a>
+
+  @if (loading()) {
+    <div class="loading-state">
+      <mat-spinner diameter="42" />
+    </div>
+  } @else if (error() && !workflow()) {
+    <div class="error-banner">{{ error() }}</div>
+  } @else if (workflow(); as item) {
+    <header class="surface detail-header">
+      <div>
+        <span class="eyebrow">Request #{{ item.id }}</span>
+        <h1 class="page-title">{{ item.title }}</h1>
+        <p class="page-subtitle">Created by {{ item.createdBy.fullName }} and assigned to {{ item.assignedTo?.fullName || 'unassigned' }}.</p>
+      </div>
+      <span class="status-chip {{ statusClass(item.status) }}">{{ item.statusLabel }}</span>
+    </header>
+
+    @if (error()) {
+      <div class="error-banner">{{ error() }}</div>
+    }
+
+    @if (loadingAction()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <div class="detail-grid">
+      <section class="surface details-panel">
+        <div class="panel-heading">
+          <h2 class="section-title">Request Details</h2>
+          @if (can('EDIT_DRAFT') && !editMode()) {
+            <button mat-stroked-button type="button" (click)="startEdit()">
+              <mat-icon>edit</mat-icon>
+              Edit Draft
+            </button>
+          }
+        </div>
+
+        @if (editMode()) {
+          <form [formGroup]="editForm" (ngSubmit)="saveDraft()" class="edit-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Request Title</mat-label>
+              <input matInput formControlName="title">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput rows="6" formControlName="description"></textarea>
+            </mat-form-field>
+            <div class="form-actions">
+              <button mat-button type="button" (click)="editMode.set(false)">Cancel</button>
+              <button mat-flat-button color="primary" type="submit" [disabled]="loadingAction() === 'SAVE_DRAFT'">Save Draft</button>
+            </div>
+          </form>
+        } @else {
+          <p class="description">{{ item.description || 'No description provided.' }}</p>
+          <mat-divider />
+          <dl class="metadata">
+            <div>
+              <dt>Created Date</dt>
+              <dd>{{ item.createdAt | date:'medium' }}</dd>
+            </div>
+            <div>
+              <dt>Last Updated</dt>
+              <dd>{{ item.updatedAt | date:'medium' }}</dd>
+            </div>
+            <div>
+              <dt>Created By</dt>
+              <dd>{{ item.createdBy.fullName }}</dd>
+            </div>
+            <div>
+              <dt>Assigned To</dt>
+              <dd>{{ item.assignedTo?.fullName || 'Unassigned' }}</dd>
+            </div>
+          </dl>
+        }
+      </section>
+
+      <aside class="surface actions-panel">
+        <h2 class="section-title">Available Actions</h2>
+        @if (item.availableActions.length === 0) {
+          <div class="empty-inline">No actions are available for your role at this status.</div>
+        } @else {
+          <form [formGroup]="actionForm" class="action-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Comments</mat-label>
+              <textarea matInput rows="4" formControlName="comments"></textarea>
+            </mat-form-field>
+
+            <div class="action-buttons">
+              @if (can('SUBMIT')) {
+                <button mat-flat-button color="primary" type="button" (click)="perform('SUBMIT')" [disabled]="!!loadingAction()">Submit Request</button>
+              }
+              @if (can('APPROVE')) {
+                <button mat-flat-button color="primary" type="button" (click)="perform('APPROVE')" [disabled]="!!loadingAction()">{{ actionLabel('APPROVE') }}</button>
+              }
+              @if (can('COMPLETE')) {
+                <button mat-flat-button color="primary" type="button" (click)="perform('COMPLETE')" [disabled]="!!loadingAction()">Complete Workflow</button>
+              }
+              @if (can('REJECT')) {
+                <button mat-stroked-button color="warn" type="button" (click)="perform('REJECT')" [disabled]="!!loadingAction()">Reject</button>
+              }
+              @if (can('COMMENT')) {
+                <button mat-stroked-button type="button" (click)="perform('COMMENT')" [disabled]="!!loadingAction()">Add Comment</button>
+              }
+            </div>
+          </form>
+        }
+      </aside>
+    </div>
+
+    <section class="surface audit-panel">
+      <h2 class="section-title">Audit Trail</h2>
+      <div class="timeline">
+        @for (audit of item.auditHistory; track audit.id) {
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-top">
+                <strong>{{ auditLabel(audit) }}</strong>
+                <time>{{ audit.timestamp | date:'medium' }}</time>
+              </div>
+              <div class="timeline-meta">
+                {{ audit.user.fullName }} · {{ transitionText(audit) }}
+              </div>
+              @if (audit.comments) {
+                <p>{{ audit.comments }}</p>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
+</section>

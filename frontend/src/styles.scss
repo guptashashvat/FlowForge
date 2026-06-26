@@ -1,0 +1,150 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  color-scheme: light;
+  --ff-bg: #f5f7fb;
+  --ff-surface: #ffffff;
+  --ff-surface-muted: #eef3f8;
+  --ff-border: #d9e2ec;
+  --ff-text: #172033;
+  --ff-muted: #667085;
+  --ff-primary: #176b87;
+  --ff-primary-strong: #0f4c5c;
+  --ff-accent: #1f8a70;
+  --ff-danger: #b42318;
+  --ff-warning: #b54708;
+  --ff-success: #027a48;
+  --ff-shadow: 0 18px 48px rgba(20, 32, 48, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--ff-bg);
+  color: var(--ff-text);
+  font-family: Inter, Roboto, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.page-subtitle {
+  margin: 6px 0 0;
+  color: var(--ff-muted);
+  max-width: 760px;
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.surface {
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 8px;
+  box-shadow: var(--ff-shadow);
+}
+
+.status-chip {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.status-draft {
+  background: #eef3f8;
+  color: #344054;
+}
+
+.status-submitted {
+  background: #e7f0ff;
+  color: #174ea6;
+}
+
+.status-manager-approved {
+  background: #e6f7f1;
+  color: var(--ff-accent);
+}
+
+.status-hr-approved {
+  background: #ecfdf3;
+  color: var(--ff-success);
+}
+
+.status-completed {
+  background: #d1fadf;
+  color: var(--ff-success);
+}
+
+.status-rejected {
+  background: #fee4e2;
+  color: var(--ff-danger);
+}
+
+.muted {
+  color: var(--ff-muted);
+}
+
+.loading-state,
+.empty-state {
+  align-items: center;
+  color: var(--ff-muted);
+  display: flex;
+  justify-content: center;
+  min-height: 220px;
+  text-align: center;
+}
+
+.error-banner {
+  background: #fff1f0;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+  color: var(--ff-danger);
+  padding: 12px 14px;
+}
+
+@media (max-width: 780px) {
+  .page-header {
+    flex-direction: column;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+}

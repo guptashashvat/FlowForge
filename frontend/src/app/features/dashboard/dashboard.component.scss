@@ -1,0 +1,161 @@
+.metric-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.metric-card {
+  border: 1px solid var(--ff-border);
+  border-radius: 8px;
+  box-shadow: var(--ff-shadow);
+}
+
+.metric-card mat-card-content {
+  align-items: flex-start;
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+}
+
+.metric-icon {
+  align-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  display: flex;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.metric-primary .metric-icon {
+  background: var(--ff-primary);
+}
+
+.metric-warning .metric-icon {
+  background: var(--ff-warning);
+}
+
+.metric-accent .metric-icon {
+  background: var(--ff-accent);
+}
+
+.metric-success .metric-icon {
+  background: var(--ff-success);
+}
+
+.metric-danger .metric-icon {
+  background: var(--ff-danger);
+}
+
+.metric-label {
+  color: var(--ff-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.metric-hint {
+  color: var(--ff-muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.chart-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+}
+
+.chart-panel {
+  padding: 20px;
+}
+
+.status-chart {
+  display: grid;
+  gap: 14px;
+}
+
+.status-row {
+  align-items: center;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 156px minmax(0, 1fr) 34px;
+}
+
+.bar-track {
+  background: var(--ff-surface-muted);
+  border-radius: 999px;
+  height: 11px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  background: linear-gradient(90deg, var(--ff-primary), var(--ff-accent));
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+}
+
+.month-chart {
+  align-items: end;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  min-height: 220px;
+}
+
+.month-column {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.month-bar {
+  align-items: end;
+  background: var(--ff-surface-muted);
+  border-radius: 8px;
+  display: flex;
+  height: 150px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.month-bar span {
+  background: linear-gradient(180deg, #2bb3a3, var(--ff-primary));
+  display: block;
+  width: 100%;
+}
+
+.month-column small {
+  color: var(--ff-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 1180px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .metric-grid,
+  .status-row {
+    grid-template-columns: 1fr;
+  }
+
+  .month-chart {
+    gap: 8px;
+  }
+}

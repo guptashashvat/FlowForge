@@ -1,0 +1,77 @@
+.create-card,
+.list-panel {
+  border-radius: 8px;
+}
+
+.create-form {
+  align-items: flex-start;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(320px, 1.2fr) auto;
+}
+
+.create-form button {
+  height: 56px;
+}
+
+.filters {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(260px, 1fr) 220px;
+  padding: 18px 18px 4px;
+}
+
+.list-panel {
+  overflow: hidden;
+}
+
+.error-banner {
+  margin: 0 18px 12px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  color: var(--ff-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+td {
+  color: var(--ff-text);
+}
+
+.workflow-row {
+  cursor: pointer;
+}
+
+.workflow-row:hover {
+  background: #f8fbfd;
+}
+
+.request-link {
+  color: var(--ff-primary);
+  font-weight: 700;
+}
+
+mat-paginator {
+  border-top: 1px solid var(--ff-border);
+}
+
+@media (max-width: 860px) {
+  .create-form,
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .create-form button {
+    width: 100%;
+  }
+}
